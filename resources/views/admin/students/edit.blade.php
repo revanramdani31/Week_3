@@ -66,6 +66,14 @@
                             </div>
 
                             <div class="mb-3">
+                                <label for="role" class="form-label">Role</label>
+                                <select class="form-control" id="role" name="role" required>
+                                    <option value="Admin" {{ old('role', $student->role) == 'Admin' ? 'selected' : '' }}>Admin</option>
+                                    <option value="Mahasiswa" {{ old('role', $student->role) == 'Mahasiswa' ? 'selected' : '' }}>Mahasiswa</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
                                 <label for="nim" class="form-label">NIM</label>
                                 <input type="text" class="form-control" id="nim" name="nim" value="{{ old('nim', $student->student->nim ?? '') }}" required>
                             </div>
@@ -73,7 +81,7 @@
                                 <label for="entry_year" class="form-label">Tahun Masuk</label>
                                 <input type="number" class="form-control" id="entry_year" name="entry_year" value="{{ old('entry_year', $student->student->entry_year ?? '') }}" required>
                             </div>
-                            <p class="text-muted small">Untuk mengubah password, gunakan fitur "Reset Password" di halaman daftar mahasiswa.</p>
+
                             <button type="submit" class="btn btn-primary">Update</button>
                         </form>
                     </div>

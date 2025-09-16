@@ -80,27 +80,35 @@ class StudentController extends Controller
     /**
      * Memperbarui data mahasiswa di database.
      */
-    public function update(Request $request, User $student)
-    {
-        $request->validate([
-            'full_name' => 'required|string|max:100',
-            'username' => ['required', 'string', 'max:50', Rule::unique('users')->ignore($student->id)],
-            'nim' => ['required', 'string', 'max:20', Rule::unique('students')->ignore($student->student->student_id, 'student_id')],
-            'password' => 'required|string|min:8|confirmed',
-            'entry_year' => 'required|digits:4|integer|min:2000',
-        ]);
+public function update(Request $request, User $student)
+{
+    $request->validate([
+        'full_name' => 'required|string|max:100',
+        'username' => ['required', 'string', 'max:50', Rule::unique('users')->ignore($student->id)],
+        'nim' => ['required', 'string', 'max:20', Rule::unique('students')->ignore($student->student->student_id, 'student_id')],
+        'password' => 'nullable|string|min:8|confirmed', // Dibuat nullable agar tidak wajib diisi
+        'entry_year' => 'required|digits:4|integer|min:2000',
+        'role' => 'required|in:Admin,Mahasiswa', // Tambahkan validasi untuk role
+    ]);
 
-        $student->update($request->only('full_name', 'username'));
+    $dataToUpdate = $request->only('full_name', 'username', 'role');
 
-        if ($student->student) {
-            $student->student->update([
-                'entry_year' => $request->entry_year,
-                'nim' => $request->nim,
-            ]);
-        }
-
-        return redirect()->route('admin.students.index')->with('success', 'Data mahasiswa berhasil diperbarui!');
+    // Hanya update password jika diisi
+    if ($request->filled('password')) {
+        $dataToUpdate['password'] = Hash::make($request->password);
     }
+
+    $student->update($dataToUpdate);
+
+    if ($student->student) {
+        $student->student->update([
+            'entry_year' => $request->entry_year,
+            'nim' => $request->nim,
+        ]);
+    }
+
+    return redirect()->route('admin.students.index')->with('success', 'Data mahasiswa berhasil diperbarui!');
+}
 
     /**
      * Menghapus mahasiswa dari database.
