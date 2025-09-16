@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('username', 50)->unique();
             $table->string('password'); // Akan menyimpan password yang di-hash
             $table->enum('role', ['Admin', 'Mahasiswa'])->default('Mahasiswa');
-            $table->rememberToken();
             $table->timestamps();
         });
     }

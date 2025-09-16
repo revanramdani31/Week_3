@@ -60,6 +60,7 @@
                         <thead class="table-dark">
                             <tr>
                                 <th>NO</th>
+                                <th>NIM</th>
                                 <th>Nama Lengkap</th>
                                 <th>Username</th>
                                 <th>Tahun Masuk</th>
@@ -70,6 +71,7 @@
                             @forelse($students as $student)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
+                                <td>{{ $student->student->nim ?? '-' }}</td>
                                 <td>{{ $student->full_name }}</td>
                                 <td>{{ $student->username }}</td>
                                 <td>{{ $student->student->entry_year ?? '-' }}</td>
@@ -85,7 +87,7 @@
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="5" class="text-center text-muted py-4">
+                                <td colspan="6" class="text-center text-muted py-4">
                                     Belum ada data mahasiswa.
                                 </td>
                             </tr>

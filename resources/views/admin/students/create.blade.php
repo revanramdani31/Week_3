@@ -74,7 +74,13 @@
                                 <label for="password_confirmation" class="form-label">Konfirmasi Password</label>
                                 <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
                             </div>
-                             <div class="mb-3">
+
+                            <div class="mb-3">
+                                <label for="nim" class="form-label">NIM</label>
+                                <input type="text" class="form-control @error('nim') is-invalid @enderror" id="nim" name="nim" value="{{ old('nim') }}" required>
+                                @error('nim') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                            </div>
+                            <div class="mb-3">
                                 <label for="entry_year" class="form-label">Tahun Masuk</label>
                                 <input type="number" class="form-control @error('entry_year') is-invalid @enderror" id="entry_year" name="entry_year" value="{{ old('entry_year') }}" placeholder="Contoh: 2023" required>
                                 @error('entry_year') <div class="invalid-feedback">{{ $message }}</div> @enderror

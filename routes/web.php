@@ -34,7 +34,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password.update');
+    // routes/web.php
+    Route::put('/profile/password', [ProfileController::class, 'passwordUpdate'])->name('profile.password.update');
 
     Route::middleware('role:Admin')->prefix('admin')->name('admin.')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');

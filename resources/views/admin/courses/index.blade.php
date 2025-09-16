@@ -60,6 +60,7 @@
                         <thead class="table-dark">
                             <tr>
                                 <th>No</th>
+                                <th>Kode MK</th>
                                 <th>Nama Mata Kuliah</th>
                                 <th>SKS</th>
                                 <th class="text-center">Aksi</th>
@@ -69,6 +70,7 @@
                             @forelse($courses as $course)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
+                                <td>{{ $course->course_code }}</td>
                                 <td>{{ $course->course_name }}</td>
                                 <td>{{ $course->credits }}</td>
                                 <td class="text-center">
@@ -83,7 +85,7 @@
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="4" class="text-center text-muted py-4">
+                                <td colspan="5" class="text-center text-muted py-4">
                                     Belum ada data mata kuliah.
                                 </td>
                             </tr>

@@ -72,13 +72,27 @@
                             @method('PATCH')
                             <div class="mb-3">
                                 <label for="full_name" class="form-label">Nama Lengkap</label>
-                                <input type="text" id="full_name" name="full_name" class="form-control" value="{{ old('full_name', $user->full_name) }}" required>
+                                <input type="text" id="full_name" name="full_name" class="form-control" value="{{ old('full_name', $user->full_name) }}" @if(Auth::user()->role == 'Mahasiswa') disabled readonly @endif required>
                             </div>
                             <div class="mb-3">
                                 <label for="username" class="form-label">Username</label>
-                                <input type="text" id="username" name="username" class="form-control" value="{{ old('username', $user->username) }}" required>
+                                <input type="text" id="username" name="username" class="form-control" value="{{ old('username', $user->username) }}" @if(Auth::user()->role == 'Mahasiswa') disabled readonly @endif required>
                             </div>
+
+                            @if(Auth::user()->role == 'Mahasiswa' && Auth::user()->student)
+                            <div class="mb-3">
+                                <label for="nim" class="form-label">NIM</label>
+                                <input id="nim" type="text" class="form-control" value="{{ Auth::user()->student->nim }}" disabled readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="entry_year" class="form-label">Tahun Masuk</label>
+                                <input id="entry_year" type="text" class="form-control" value="{{ Auth::user()->student->entry_year }}" disabled readonly>
+                            </div>
+                            @endif
+
+                            @if(Auth::user()->role == 'Admin')
                             <button type="submit" class="btn btn-primary">Update Profil</button>
+                            @endif
                         </form>
                     </div>
                 </div>

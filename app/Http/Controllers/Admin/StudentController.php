@@ -39,6 +39,7 @@ class StudentController extends Controller
             'username' => 'required|string|max:50|unique:users',
             'password' => 'required|string|min:8|confirmed',
             'entry_year' => 'required|digits:4|integer|min:2000',
+            'nim' => 'required|string|max:20|unique:students,nim',
         ]);
 
         DB::transaction(function () use ($request) {
@@ -52,6 +53,7 @@ class StudentController extends Controller
             $user->student()->create([
                 'student_id' => $user->id,
                 'entry_year' => $request->entry_year,
+                'nim' => $request->nim,
             ]);
         });
 
@@ -83,7 +85,7 @@ class StudentController extends Controller
         $request->validate([
             'full_name' => 'required|string|max:100',
             'username' => ['required', 'string', 'max:50', Rule::unique('users')->ignore($student->id)],
-            'nim' => 'required|string|max:20|unique:students',
+            'nim' => ['required', 'string', 'max:20', Rule::unique('students')->ignore($student->student->student_id, 'student_id')],
             'password' => 'required|string|min:8|confirmed',
             'entry_year' => 'required|digits:4|integer|min:2000',
         ]);
@@ -91,7 +93,10 @@ class StudentController extends Controller
         $student->update($request->only('full_name', 'username'));
 
         if ($student->student) {
-            $student->student->update(['entry_year' => $request->entry_year]);
+            $student->student->update([
+                'entry_year' => $request->entry_year,
+                'nim' => $request->nim,
+            ]);
         }
 
         return redirect()->route('admin.students.index')->with('success', 'Data mahasiswa berhasil diperbarui!');

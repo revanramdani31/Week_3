@@ -31,6 +31,7 @@ class CourseController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'course_code' => 'required|string|max:20|unique:courses,course_code', // <-- TAMBAHKAN VALIDASI
             'course_name' => 'required|string|max:100',
             'credits' => 'required|integer',
         ]);
@@ -65,7 +66,9 @@ class CourseController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $course = Course::findOrFail($id);
         $request->validate([
+            'course_code' => 'required|string|max:20|unique:courses,course_code,' . $course->course_id . ',course_id',
             'course_name' => 'required|string|max:100',
             'credits' => 'required|integer',
         ]);

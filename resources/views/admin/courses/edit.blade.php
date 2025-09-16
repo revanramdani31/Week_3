@@ -57,6 +57,10 @@
                             @csrf
                             @method('PUT')
                             <div class="mb-3">
+                                <label for="course_code" class="form-label">Kode Mata Kuliah</label>
+                                <input type="text" class="form-control" id="course_code" name="course_code" value="{{ old('course_code', $course->course_code) }}" required>
+                            </div>
+                            <div class="mb-3">
                                 <label for="course_name" class="form-label">Nama Mata Kuliah</label>
                                 <input type="text" class="form-control" id="course_name" name="course_name" value="{{ old('course_name', $course->course_name) }}" required>
                             </div>

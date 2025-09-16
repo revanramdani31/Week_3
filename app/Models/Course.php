@@ -13,6 +13,7 @@ class Course extends Model
     public $incrementing = true;
 
     protected $fillable = [
+        'course_code',
         'course_name',
         'credits',
     ];

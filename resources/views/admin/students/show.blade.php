@@ -54,6 +54,7 @@
                         <h5>Informasi Akun</h5>
                         <ul class="list-group">
                             <li class="list-group-item"><strong>ID:</strong> {{ $student->id }}</li>
+                            <li class="list-group-item"><strong>NIM:</strong> {{ $student->student->nim ?? '-' }}</li>
                             <li class="list-group-item"><strong>Nama Lengkap:</strong> {{ $student->full_name }}</li>
                             <li class="list-group-item"><strong>Username:</strong> {{ $student->username }}</li>
                             <li class="list-group-item"><strong>Tahun Masuk:</strong> {{ $student->student->entry_year ?? '-' }}</li>

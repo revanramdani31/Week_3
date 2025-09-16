@@ -64,6 +64,11 @@
                                 <label for="username" class="form-label">Username</label>
                                 <input type="text" class="form-control" id="username" name="username" value="{{ old('username', $student->username) }}" required>
                             </div>
+
+                            <div class="mb-3">
+                                <label for="nim" class="form-label">NIM</label>
+                                <input type="text" class="form-control" id="nim" name="nim" value="{{ old('nim', $student->student->nim ?? '') }}" required>
+                            </div>
                             <div class="mb-3">
                                 <label for="entry_year" class="form-label">Tahun Masuk</label>
                                 <input type="number" class="form-control" id="entry_year" name="entry_year" value="{{ old('entry_year', $student->student->entry_year ?? '') }}" required>

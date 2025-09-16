@@ -54,6 +54,7 @@
                         <h5>Informasi Mata Kuliah</h5>
                         <ul class="list-group">
                             <li class="list-group-item"><strong>ID:</strong> {{ $course->course_id }}</li>
+                            <li class="list-group-item"><strong>Kode Mata Kuliah:</strong> {{ $course->course_code }}</li>
                             <li class="list-group-item"><strong>Nama Mata Kuliah:</strong> {{ $course->course_name }}</li>
                             <li class="list-group-item"><strong>Jumlah SKS:</strong> {{ $course->credits }}</li>
                         </ul>
